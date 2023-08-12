@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   lang="en"
+   xml:lang="en">
+
+  <head>
+    <meta
+       http-equiv="content-type"
+       content="text/html;charset=UTF-8"/>
+    <title>Playfair cipher assistant</title>
+    <link
+       href="style/playfair.css"
+       media="screen"
+       rel="stylesheet"
+       type="text/css"/>
+    <link
+       href="style/playfairUi.css"
+       media="screen"
+       rel="stylesheet"
+       type="text/css"/>
+    <script
+       src="scripts/CharacterMap.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/PlayfairSquare.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/Problem.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/Solution.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/Utils.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/View.js"
+       type="text/javascript">
+    </script>
+    <script
+       src="scripts/init.js"
+       type="text/javascript">
+    </script>
+  </head>
+
+  <body>
+
+    <!-- Title -->
+
+    <div id="title">
+      <div>
+        Playfair cipher assistant
+      </div>
+    </div>
+
+
+    <!-- Requirements -->
+
+    <div class="wrap" id="jsRequired">
+      You must have JavaScript enabled in your browser in order to use the Playfair
+      application.
+    </div>
+
+
+    <!-- Preamble -->
+
+    <div id="preamble">
+      <p class="wrap">
+        The <a class="external" href="https://en.wikipedia.org/wiki/Playfair_cipher">Playfair
+        cipher</a> is a cryptographic cipher that was devised in the 19th century.  It is far
+        too weak to be used in modern cryptography, but it is occasionally used in thematic
+        cryptic crosswords such as the <a class="external"
+        href="https://en.wikipedia.org/wiki/Azed">Azed</a>, which appears in <i>The Observer</i>
+        newspaper (UK), and the Listener crossword, which appears in the Saturday edition of
+        <i>The Times</i> newspaper (UK).  This application is intended to assist in solving the
+        Playfair element of those crossword puzzles.
+      </p>
+    </div>
+
+
+    <!-- User interface -->
+
+    <div id="ui">
+      <div id="upperPane">
+        <div>
+          <div>
+            <div id="codeSquare">
+              <div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+              </div>
+              <div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+              </div>
+              <div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+              </div>
+              <div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+              </div>
+              <div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div id="encryptionPane">
+              <div>
+                <div class="label">Keyword</div>
+                <div>
+                  <span>
+                    <input id="keywordField" size="24" type="text"/>
+                  </span>
+                  <span class="adjacentButton">
+                    <button disabled="disabled" id="setKeyButton" type="button">Set key</button>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div class="label">Padding</div>
+                <div>
+                  <select id="paddingCharList"></select>
+                </div>
+              </div>
+              <div>
+                <div class="label">Plaintext</div>
+                <div>
+                  <span>
+                    <input id="plaintextField" type="text"/>
+                  </span>
+                  <span class="adjacentButton">
+                    <button disabled="disabled" id="encryptButton" type="button">Encrypt</button>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div class="label">Ciphertext</div>
+                <div>
+                  <span>
+                    <input id="ciphertextField" type="text"/>
+                  </span>
+                  <span class="adjacentButton">
+                    <button disabled="disabled" id="decryptButton" type="button">Decrypt</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div id="solutionPane">
+        <div id="solutionUpperPane">
+          <div>
+            <div id="mappingsCell">
+              <div class="label">Mappings:</div>
+              <div>
+                <textarea cols="40" id="mappingsTextArea" rows="16"></textarea>
+              </div>
+            </div>
+            <div id="solutionsCell">
+              <div class="label">Solutions:</div>
+              <div>
+                <textarea cols="34" id="solutionsTextArea" readonly="readonly" rows="16"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="solutionControlPane">
+          <div>
+            <div class="label">Maximum number of solutions:</div>
+            <div>
+              <input id="maxNumSolutionsField" maxlength="3" size="3" type="text"/>
+            </div>
+            <div class="filler"></div>
+            <div>
+              <button disabled="disabled" id="solveButton" type="button">Solve</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Main text -->
+
+    <div id="sectionPanes">
+      <p class="noBottomMargin wrap">
+        The user interface of the Playfair application consists of two panes:
+      </p>
+      <ul class="continuationList">
+        <li class="wrap">
+          in the upper pane, you can <a href="#sectionEncryption">perform encryption and
+          decryption</a> with a Playfair code square that is constructed from a specified key;
+        </li>
+        <li class="wrap">
+          in the lower pane, you can <a href="#sectionSolutions">search for solutions</a> to a
+          Playfair cipher by providing some mappings from plaintext to ciphertext.
+        </li>
+      </ul>
+    </div>
+      
+    <div id="sectionEncryption">
+      <h2>Performing encryption and decryption</h2>
+      <p class="wrap">
+        Encryption and decryption are controlled with the components in the upper pane of the
+        user interface.  Before you can encrypt or decrypt, you must set the key of the cipher
+        by entering the keyword in the <span class="component">Keyword</span> field and then
+        clicking the <span class="component">Set key</span> button.  When a key is set, the code
+        square will be updated and the <span class="component">Plaintext</span> and <span
+        class="component">Ciphertext</span> fields and their adjacent buttons, <span
+        class="component">Encrypt</span> and <span class="component">Decrypt</span>, will be
+        enabled.
+      </p>
+      <p class="wrap">
+        The Playfair alphabet consists of 25 letters, which, by convention, are the 26 letters
+        of the English alphabet without the letter <span class="keyword">J</span>.  <span
+        class="keyword">I</span> serves for both <span class="keyword">I</span> and <span
+        class="keyword">J</span>: when setting a key or performing encryption, any occurrences
+        of the letter <span class="keyword">J</span> in the keyword or plaintext are replaced by
+        <span class="keyword">I</span>.
+      </p>
+      <p class="wrap">
+        In creating a key from a keyword, only the first occurrence of a particular letter is
+        used; subsequent occurrences of the letter are ignored.  The remaining letters of the
+        Playfair alphabet are appended in alphabetical order to the sequence of unique letters
+        from the keyword.  For example, if the keyword were <span
+        class="keyword">PSEUDORANDOM</span>, the key of the cipher would be <span
+        class="keyword">PSEUDORANMBCFGHIKLQTVWXYZ</span>.
+      </p>
+      <p class="wrap">
+        To perform encryption, enter the word to be encrypted in the <span
+        class="component">Plaintext</span> field and click the <span
+        class="component">Encrypt</span> button.  The encrypted word will be displayed in the
+        <span class="component">Ciphertext</span> field.  Conversely, to perform decryption,
+        enter the word to be decrypted in the <span class="component">Ciphertext</span> field
+        and click the <span class="component">Decrypt</span> button.  The decrypted word will be
+        displayed in the <span class="component">Plaintext</span> field.
+      </p>
+      <p class="wrap">
+        Because the Playfair cipher operates on pairs of letters, the length of plaintext and
+        ciphertext must be even.  In some crosswords, plaintext with an odd number of letters is
+        allowed by appending a specified letter to it, thereby padding it to an even length for
+        encryption.  In such cases, you can select the letter from the <span
+        class="component">Padding</span> drop-down list; when encrypting, the selected letter
+        will be appended automatically to plaintext whose length is odd.
+      </p>      
+      <p class="wrap">
+        When a word is encrypted or decrypted, it is split into a sequence of pairs of letters.
+        Pairs of identical letters are not allowed in either the plaintext or the ciphertext,
+        though two successive identical letters are allowed if they don&apos;t correspond to a
+        logical pairing.  For example, <span class="keyword">ASSENT</span> (AS-SE-NT) is allowed
+        but <span class="keyword">PASSED</span> (PA-SS-ED) is not.
+      </p>
+      <p class="wrap">
+        If you press the Enter key when one of the three text fields has keyboard focus, it will
+        have the same effect as clicking the button adjacent to the field.
+      </p>
+    </div>
+
+    <div id="sectionSolutions">
+      <h2>Searching for solutions to a Playfair cipher</h2>
+      <p class="wrap">
+        The search for solutions to a Playfair cipher is controlled with the components in the
+        lower pane of the user interface.  To perform the search, you must enter some mappings
+        from plaintext to ciphertext in the <span class="component">Mappings</span> text area,
+        then click the <span class="component">Solve</span> button.
+      </p>
+      <p class="wrap">
+        A <i>mapping</i> is a line of text consisting of plaintext and ciphertext separated by
+        whitespace (spaces (U+0020) or tab characters (U+0009)).  The plaintext must consist
+        entirely of letters, while the ciphertext may contain either letters or <span
+        class="keyword">?</span> characters (U+003F), with each <span class="keyword">?</span>
+        character denoting an unknown letter.  The plaintext and ciphertext must have the same
+        length, which must be even.  Pairs of identical letters in either the plaintext or the
+        ciphertext are not allowed if the letters correspond to a logical pairing, as described
+        in the previous section.  There may be whitespace before the plaintext or after the
+        ciphertext.
+      </p>
+      <p class="wrap">
+        The text in the <span class="component">Mappings</span> area may consist of multiple
+        lines, with no more than one mapping per line.  Blank lines are ignored.  The <span
+        class="keyword">#</span> character (U+0023) is deemed to introduce a comment, and any
+        text from a <span class="keyword">#</span> character to the end of the line is ignored.
+        The mappings must contain at least one <em>complete</em> mapping from a pair of
+        plaintext letters to a pair of ciphertext letters (that is, one in which both ciphertext
+        letters are specified).
+      </p>
+      <p class="wrap">
+        You can limit the number of solutions that will be found in a search by entering the
+        required value in the <span class="component">Maximum number of solutions</span> field.
+        By default, the upper limit is 500 solutions, which is the number of solutions for the
+        minimal mapping from a pair of plaintext letters to a pair of ciphertext letters.
+        Solutions are not found in order of their plausibility: if the upper limit is too low,
+        the best candidate may be missed.
+      </p>
+      <p class="wrap">
+        When you have entered all the mappings in the <span class="component">Mappings</span>
+        text area, click the <span class="component">Solve</span> button to begin the search for
+        solutions.  If there are no errors in the mappings, a list of the solutions that are
+        found will be displayed in the <span class="component">Solutions</span> text area.
+      </p>
+      <p class="wrap">
+        If there are errors in any of the mappings (eg, the plaintext and ciphertext are of
+        different lengths), a message relating to the first error will be displayed and the
+        <span class="component">Solutions</span> area will be cleared.  A line number in an
+        error message is <em>one-based</em> (ie, the first line of text is line 1).  An index in
+        an error message denotes the <em>zero-based</em> index of a letter in the plaintext or
+        ciphertext of a specified line.
+      </p>
+      <p class="wrap">
+        The list of solutions is preceded by some information about the search: the maximum
+        number of solutions and the number of solutions that were found.  Each solution consists
+        of a Playfair square in linear form (ie, a possible key for the cipher), with a dot in
+        the place of each unknown entry.  Unless the mappings contain information on all 25
+        letters, the key will be incomplete, and you will have to infer the missing letters.
+        The number in parentheses after each solution is the minimum length of the keyword,
+        which is calculated from the length of the &quot;tail&quot; &mdash; the letters in
+        alphabetical order that follow the keyword.  (In a fancier user interface, the letters
+        of the solution corresponding to the minimum length would be highlighted.)  The
+        solutions are listed in order of increasing minimum length of the keyword, and the more
+        plausible keywords will be found towards the top of the list.
+      </p>
+      <p class="wrap">
+        The following example contains several mappings for Playfair-encrypted entries in a
+        crossword.  The keyword, <span class="keyword">OBSERVANTLY</span>, appears as a comment:
+      </p>
+      <pre class="example"># OBSERVANTLY
+
+ANYHOW   N?HQ??
+MELTED   XT??SF
+LINCTURE ??ADAX?R
+RIBOSOME B?SBEB??
+BECALM   SR??TP
+OUTFIT   ??FM?A</pre>
+      <p class="wrap">
+        If you copy the example, paste it into the <span class="component">Mappings</span> text
+        area and click the <span class="component">Solve</span> button, a list of 100 solutions
+        should be displayed in the <span class="component">Solutions</span> text area.  The
+        keyword, <span class="keyword">OBSERVANTLY</span>, with the <span
+        class="keyword">V</span> missing, is the second item in the list.  (In this example,
+        <span class="keyword">BSEROANTLY</span> is also a valid keyword, but is unlikely to be
+        the keyword for a crossword because it is not a word in the English language.)
+      </p>
+    </div>
+
+    <div id="sectionNotes">
+      <h3>Notes on the Playfair application</h3>
+      <ol class="notes">
+        <li class="wrap">
+          The JavaScript for the Playfair application on this page is free software, distributed
+          under version 3 of the <a class="external"
+          href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>.
+        </li>
+        <li class="wrap">
+          In the application, the conventional character map in which occurrences of the letter
+          <span class="keyword">J</span> in the keyword or plaintext are replaced by <span
+          class="keyword">I</span> is implemented by the <code>CharacterMap</code> class.  If
+          you want a different mapping, you can modify
+          <code>CharacterMap.DEFAULT_OUT_CHARS</code>.
+        </li>
+      </ol>
+    </div>
+
+  </body>
+</html>

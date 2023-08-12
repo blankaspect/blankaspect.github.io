@@ -1,0 +1,191 @@
+/**********************************************************************\
+
+Styles for Playfair page
+
+\**********************************************************************/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+.continuationList
+{
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  padding-top: 0.1em;
+}
+
+.noBottomMargin
+{
+  margin-bottom: 0;
+}
+
+a
+{
+  color: #0000A0;
+}
+a.external
+{
+  padding-right: 1.3em;
+  background-position: 100% 45%;
+  background-repeat: no-repeat;
+  background-image: url("../images/externalLink.svg");
+}
+
+a img
+{
+  border-style: none;
+}
+
+body
+{
+  font-family: "Roboto", sans-serif;
+  color: #000000;
+  background-color: #F6F6F2;
+  margin: 1.5em 3.0em;
+  line-height: 166.7%;
+  overflow: scroll;
+}
+
+code
+{
+  font-family: "Roboto Mono", monospace;
+}
+
+div#footer
+{
+  display: table;
+  line-height: 100%;
+  width: 100%;
+  padding: 0.6em 0;
+}
+div#footer > div
+{
+  display: table-row;
+}
+div#footer > div > div
+{
+  display: table-cell;
+  font-size: 82%;
+  white-space: nowrap;
+}
+div#footer > div > div.lastModified
+{
+  font-style: italic;
+}
+div#footer > div > div.filler
+{
+  width: 100%;
+}
+div#footer img
+{
+  margin-bottom: -3px;
+  margin-left: 0.4em;
+}
+
+div.header
+{
+  background-color: #F0F4E8;
+}
+div.header h1
+{
+  border: 1px solid #C0D0C0;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+div#jsRequired
+{
+  background-color: #FEF4D0;
+  border: 1px solid #E8C080;
+  padding: 1.0em;
+}
+
+div#sectionNotes
+{
+  margin-top: 1.5em;
+  border-top: 3px solid #B4B8C8;
+  border-bottom: 3px solid #B4B8C8;
+  padding-bottom: 0.5em;
+}
+
+div#title
+{
+  display: flex;
+  align-items: center;
+  background-color: #E8ECF0;
+  padding: 1.5em;
+  border-top: 1px solid #D0D4D8;
+  border-bottom: 1px solid #D0D4D8;
+}
+div#title > div
+{
+  display: block;
+  color: #304868;
+  font-size: 160%;
+  font-weight: bold;
+  padding-right: 0.75em;
+}
+
+div#ui
+{
+  padding: 1.0em 0;
+}
+
+h1
+{
+  color: #304868;
+  font-size: 160%;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+h2
+{
+  color: #304868;
+  font-weight: bold;
+  font-size: 128%;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #B4B8C8;
+}
+
+h3
+{
+  color: #304868;
+  font-weight: bold;
+  font-size: 112%;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+
+ol.notes > li
+{
+  margin: 0.3em 0 0.3em -0.5em;
+}
+
+pre.example
+{
+  font-family: "Roboto Mono", monospace;
+  background-color: #F2F2EC;
+  border: 1px solid #DCDCD0;
+  padding: 0.5em 0.8em;
+}
+
+span.component
+{
+  font-style: italic;
+  color: #006080;
+}
+
+span.emphasised
+{
+  color: #804000;
+  font-weight: bold;
+}
+
+span.keyword
+{
+  color: #C03000;
+}
+
+/*--------------------------------------------------------------------*/
