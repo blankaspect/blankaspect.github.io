@@ -7,21 +7,9 @@ Styles for Blank Aspect web pages
 @import url("blankaspect-common.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-a
-{
-  color: #0000A0;
-}
-a.blankAspectLink
-{
-  color: #804000;
-  text-decoration: none;
-}
-
-body
-{
+body {
   font-family: "Roboto", sans-serif;
   line-height: 166.7%;
-  color: #000000;
   background-image: url("../images/logoBackground-512x256.png");
   background-repeat: repeat-y;
   background-position: top center;
@@ -29,68 +17,100 @@ body
   overflow: scroll;
 }
 
-code, code:link, code:visited
-{
+code, code:link, code:visited {
   font-family: "Roboto Mono", monospace;
-  color: #004060;
-  background-color: #E8E8E8;
   padding-left: 0.25em;
   padding-right: 0.25em;
 }
 
-div#footer
-{
+div#footer {
   display: table;
   line-height: 100%;
   padding: 0.6em 0;
 }
-div#footer > div
-{
+div#footer > div {
   display: table-row;
 }
-div#footer > div > div
-{
+div#footer > div > div {
   display: table-cell;
   font-size: 82%;
   white-space: nowrap;
 }
-div#footer > div > div.lastModified
-{
+div#footer > div > div.lastModified {
   font-style: italic;
 }
-div#footer > div > div.filler
-{
+div#footer > div > div.filler {
   width: 100%;
   padding-left: 1.5em;
 }
-div#footer > div > div.separator
-{
+div#footer > div > div.separator {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
-div#footer img
-{
+div#footer img {
   margin-bottom: -3px;
   margin-left: 0.4em;
 }
 
-div#header
-{
+div#header {
   background-image: url("../images/titleBackground.png");
   background-repeat: repeat-x;
   background-position: center center;
   padding: 15px;
   text-align: center;
 }
-div#header img
-{
+div#header img {
   vertical-align: top;
 }
 
-span.emphasised
-{
-  color: #804000;
+span.emphasised {
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: light) {
+  a {
+    color: #0000A0;
+  }
+
+  a.blankAspectLink {
+    color: #804000;
+  }
+
+  body {
+    background-image: url("../images/logoBackground-light-512x256.png");
+  }
+
+  code, code:link, code:visited {
+    color: #004060;
+    background-color: #E8E8E8;
+  }
+
+  span.emphasised {
+    color: #804000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #A0C0FC;
+  }
+
+  a.blankAspectLink {
+    color: #E08000;
+  }
+
+  body {
+    background-image: url("../images/logoBackground-dark-512x256.png");
+  }
+
+  code, code:link, code:visited {
+    color: #80C0E0;
+    background-color: #606060;
+  }
+
+  span.emphasised {
+    color: #E08000;
+  }
 }
 
 /*--------------------------------------------------------------------*/

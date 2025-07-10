@@ -229,8 +229,8 @@ View.inputCharFilter = function(event)
 	{
 		var ch = String.fromCharCode(code);
 		var valid = (event.target.id == View.Id.MAX_NUM_SOLUTIONS_FIELD)
-												? (ch >= "0") && (ch <= "9")
-												: (CharacterMap.IN_CHARS.indexOf(ch.toUpperCase()) >= 0);
+								? (ch >= "0") && (ch <= "9")
+								: (CharacterMap.IN_CHARS.indexOf(ch.toUpperCase()) >= 0);
 		if (!valid)
 		{
 			if (event.preventDefault)

@@ -83,8 +83,7 @@ Utils.substitute = function(str, substitutionStrs)
 			}
 			if (index > startIndex)
 			{
-				var substIndex = parseInt(str.substring(startIndex, index)) -
-																			Utils.MIN_SUBSTITUTION_INDEX;
+				var substIndex = parseInt(str.substring(startIndex, index)) - Utils.MIN_SUBSTITUTION_INDEX;
 				if ((substIndex >= 0) && (substIndex < substitutionStrs.length))
 				{
 					var substStr = substitutionStrs[substIndex];

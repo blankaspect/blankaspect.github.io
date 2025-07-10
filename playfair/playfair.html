@@ -20,32 +20,25 @@
        rel="stylesheet"
        type="text/css"/>
     <script
-       src="scripts/CharacterMap.js"
-       type="text/javascript">
+       src="scripts/CharacterMap.js">
     </script>
     <script
-       src="scripts/PlayfairSquare.js"
-       type="text/javascript">
+       src="scripts/PlayfairSquare.js">
     </script>
     <script
-       src="scripts/Problem.js"
-       type="text/javascript">
+       src="scripts/Problem.js">
     </script>
     <script
-       src="scripts/Solution.js"
-       type="text/javascript">
+       src="scripts/Solution.js">
     </script>
     <script
-       src="scripts/Utils.js"
-       type="text/javascript">
+       src="scripts/Utils.js">
     </script>
     <script
-       src="scripts/View.js"
-       type="text/javascript">
+       src="scripts/View.js">
     </script>
     <script
-       src="scripts/init.js"
-       type="text/javascript">
+       src="scripts/init.js">
     </script>
   </head>
 
@@ -63,8 +56,7 @@
     <!-- Requirements -->
 
     <div class="wrap" id="jsRequired">
-      You must have JavaScript enabled in your browser in order to use the Playfair
-      application.
+      You must have JavaScript enabled in your browser in order to use the Playfair application.
     </div>
 
 
@@ -186,16 +178,17 @@
             <div id="solutionsCell">
               <div class="label">Solutions:</div>
               <div>
-                <textarea cols="34" id="solutionsTextArea" readonly="readonly" rows="16"></textarea>
+                <textarea cols="40" id="solutionsTextArea" readonly="readonly" rows="16"></textarea>
               </div>
             </div>
           </div>
         </div>
         <div id="solutionControlPane">
           <div>
-            <div class="label">Maximum number of solutions:</div>
+            <div class="label">Maximum number of solutions</div>
             <div>
-              <input id="maxNumSolutionsField" maxlength="3" size="3" type="text"/>
+              <input id="maxNumSolutionsField" inputmode="numeric" maxlength="3" size="3"
+                 type="text"/>
             </div>
             <div class="filler"></div>
             <div>
@@ -215,11 +208,11 @@
       </p>
       <ul class="continuationList">
         <li class="wrap">
-          in the upper pane, you can <a href="#sectionEncryption">perform encryption and
-          decryption</a> with a Playfair code square that is constructed from a specified key;
+          In the upper pane, you can <a href="#sectionEncryption">perform encryption and
+          decryption</a> with a Playfair code square that is constructed from a specified key.
         </li>
         <li class="wrap">
-          in the lower pane, you can <a href="#sectionSolutions">search for solutions</a> to a
+          In the lower pane, you can <a href="#sectionSolutions">search for solutions</a> to a
           Playfair cipher by providing some mappings from plaintext to ciphertext.
         </li>
       </ul>

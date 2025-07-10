@@ -34,8 +34,8 @@ General Public License for more details: <http://www.gnu.org/licenses/>
 //  Constants
 ////////////////////////////////////////////////////////////////////////
 
-SolutionList.MAX_NUM_SOLUTIONS_STR	= "Maximum number of solutions = ";
-SolutionList.NUM_SOLUTIONS_STR		= "Number of solutions found = ";
+SolutionList.MAX_NUM_SOLUTIONS_STR	= "Maximum number of solutions : ";
+SolutionList.NUM_SOLUTIONS_STR		= "Number of solutions found : ";
 
 ////////////////////////////////////////////////////////////////////////
 //  Constructor

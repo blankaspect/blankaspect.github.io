@@ -70,22 +70,22 @@ CodeMapEntry.prototype.isC2Unknown = function()
 
 CodeMapEntry.prototype.isIncomplete = function()
 {
-	return ((this.c1 == CodeMapEntry.UNKNOWN_INDEX) || (this.c2 == CodeMapEntry.UNKNOWN_INDEX));
+	return (this.c1 == CodeMapEntry.UNKNOWN_INDEX) || (this.c2 == CodeMapEntry.UNKNOWN_INDEX);
 };
 
 //----------------------------------------------------------------------
 
 CodeMapEntry.prototype.isPlaintextEqual = function(entry)
 {
-	return ((this.p1 == entry.p1) && (this.p2 == entry.p2));
+	return (this.p1 == entry.p1) && (this.p2 == entry.p2);
 };
 
 //----------------------------------------------------------------------
 
 CodeMapEntry.prototype.equals = function(obj)
 {
-	return ((obj instanceof CodeMapEntry) &&
-			 (this.p1 == obj.p1) && (this.p2 == obj.p2) && (this.c1 == obj.c1) && (this.c2 == obj.c2));
+	return (obj instanceof CodeMapEntry) && (this.p1 == obj.p1) && (this.p2 == obj.p2)
+			&& (this.c1 == obj.c1) && (this.c2 == obj.c2);
 };
 
 //----------------------------------------------------------------------
@@ -116,10 +116,8 @@ CodeMapEntry.prototype.toString = function(characterMap)
 	str += characterMap.getOutChar(this.p1);
 	str += characterMap.getOutChar(this.p2);
 	str += " -> ";
-	str += (this.c1 == CodeMapEntry.UNKNOWN_INDEX) ? Problem.UNKNOWN_CHAR
-												   : characterMap.getOutChar(this.c1);
-	str += (this.c2 == CodeMapEntry.UNKNOWN_INDEX) ? Problem.UNKNOWN_CHAR
-												   : characterMap.getOutChar(this.c2);
+	str += (this.c1 == CodeMapEntry.UNKNOWN_INDEX) ? Problem.UNKNOWN_CHAR : characterMap.getOutChar(this.c1);
+	str += (this.c2 == CodeMapEntry.UNKNOWN_INDEX) ? Problem.UNKNOWN_CHAR : characterMap.getOutChar(this.c2);
 	return str;
 };
 
@@ -134,20 +132,14 @@ CodeMapEntry.prototype.update = function(entry)
 	// Update first ciphertext index
 	if (this.c1 == CodeMapEntry.UNKNOWN_INDEX)
 		this.c1 = entry.c1;
-	else
-	{
-		if ((entry.c1 != CodeMapEntry.UNKNOWN_INDEX) && (this.c1 != entry.c1))
-			return false;
-	}
+	else if ((entry.c1 != CodeMapEntry.UNKNOWN_INDEX) && (this.c1 != entry.c1))
+		return false;
 
 	// Update second ciphertext index
 	if (this.c2 == CodeMapEntry.UNKNOWN_INDEX)
 		this.c2 = entry.c2;
-	else
-	{
-		if ((entry.c2 != CodeMapEntry.UNKNOWN_INDEX) && (this.c2 != entry.c2))
-			return false;
-	}
+	else if ((entry.c2 != CodeMapEntry.UNKNOWN_INDEX) && (this.c2 != entry.c2))
+		return false;
 
 	return true;
 };
@@ -346,38 +338,50 @@ Problem.prototype.setMap = function(str)
 					var p1 = plaintext.charAt(i);
 					var p2 = plaintext.charAt(i + 1);
 					if ((p1 < "A") || (p1 > "Z"))
+					{
 						throw new ProblemException(Problem.ErrorMsg.ILLEGAL_CHARACTER, lineIndex, i,
 												   Problem.PLAINTEXT_STR, p1);
+					}
 					if ((p2 < "A") || (p2 > "Z"))
+					{
 						throw new ProblemException(Problem.ErrorMsg.ILLEGAL_CHARACTER, lineIndex, i + 1,
 												   Problem.PLAINTEXT_STR, p2);
+					}
 					if (p1 == p2)
+					{
 						throw new ProblemException(Problem.ErrorMsg.IDENTICAL_PAIR, lineIndex, i,
 												   Problem.PLAINTEXT_STR, p1);
+					}
 
 					// Validate pair of ciphertext characters
 					var c1 = ciphertext.charAt(i);
 					var c2 = ciphertext.charAt(i + 1);
 					if ((c1 != Problem.UNKNOWN_CHAR) && ((c1 < "A") || (c1 > "Z")))
+					{
 						throw new ProblemException(Problem.ErrorMsg.ILLEGAL_CHARACTER, lineIndex, i,
 												   Problem.CIPHERTEXT_STR, c1);
+					}
 					if ((c2 != Problem.UNKNOWN_CHAR) && ((c2 < "A") || (c2 > "Z")))
+					{
 						throw new ProblemException(Problem.ErrorMsg.ILLEGAL_CHARACTER, lineIndex, i + 1,
 												   Problem.CIPHERTEXT_STR, c2);
+					}
 					if ((c1 != Problem.UNKNOWN_CHAR) && (c1 == c2))
+					{
 						throw new ProblemException(Problem.ErrorMsg.IDENTICAL_PAIR, lineIndex, i,
 												   Problem.CIPHERTEXT_STR, c1);
+					}
 
 					// Validate plaintext against ciphertext
 					if (p1 == c1)
-						throw new ProblemException(Problem.ErrorMsg.LETTER_MAPS_TO_ITSELF, lineIndex, i,
-												   p1);
+						throw new ProblemException(Problem.ErrorMsg.LETTER_MAPS_TO_ITSELF, lineIndex, i, p1);
 					if (p2 == c2)
-						throw new ProblemException(Problem.ErrorMsg.LETTER_MAPS_TO_ITSELF, lineIndex, i + 1,
-												   p2);
+						throw new ProblemException(Problem.ErrorMsg.LETTER_MAPS_TO_ITSELF, lineIndex, i + 1, p2);
 					if ((p1 == c2) && (p2 == c1))
-						throw new ProblemException(Problem.ErrorMsg.INVALID_PAIR_MAPPING, lineIndex, i,
-												   p1 + p2, c1 + c2);
+					{
+						throw new ProblemException(Problem.ErrorMsg.INVALID_PAIR_MAPPING, lineIndex, i, p1 + p2,
+												   c1 + c2);
+					}
 
 					// Add entry
 					if ((c1 != Problem.UNKNOWN_CHAR) || (c2 != Problem.UNKNOWN_CHAR))
@@ -388,8 +392,10 @@ Problem.prototype.setMap = function(str)
 							if (this.entries[j].isPlaintextEqual(entry))
 							{
 								if (!this.entries[j].update(entry))
-									throw new ProblemException(Problem.ErrorMsg.INCONSISTENT_CIPHERTEXT,
-															   lineIndex, i, c1 + c2, p1 + p2);
+								{
+									throw new ProblemException(Problem.ErrorMsg.INCONSISTENT_CIPHERTEXT, lineIndex, i,
+															   c1 + c2, p1 + p2);
+								}
 								entry = null;
 								break;
 							}

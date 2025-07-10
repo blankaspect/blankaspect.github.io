@@ -77,7 +77,7 @@ PlayfairSquare.CIPHERTEXT_STR	= "ciphertext";
 //  Error messages
 ////////////////////////////////////////////////////////////////////////
 
-PlayfairSquare.ErrorId =
+PlayfairSquare.ErrorMsg =
 {
 	NO_KEY :
 	"No key has been set.",
@@ -270,8 +270,7 @@ PlayfairSquare.prototype.setKey = function(keyStr)
 		var ch = keyStr.charAt(i);
 		var index = this.characterMap.getInIndex(ch.toUpperCase());
 		if (index < 0)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.INVALID_CHARACTER,
-											  PlayfairSquare.KEY_STR, ch);
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.INVALID_CHARACTER, PlayfairSquare.KEY_STR, ch);
 		if (!used[index])
 		{
 			this.key[j++] = index;
@@ -300,12 +299,11 @@ PlayfairSquare.prototype.encrypt = function(str)
 {
 	// Test for valid key
 	if (!this.valid)
-		throw new PlayfairSquareException(PlayfairSquare.ErrorId.NO_KEY);
+		throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.NO_KEY);
 
 	// Test for odd-length string
 	if (str.length % 2 != 0)
-		throw new PlayfairSquareException(PlayfairSquare.ErrorId.LENGTH_IS_ODD,
-										  PlayfairSquare.PLAINTEXT_STR);
+		throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.LENGTH_IS_ODD, PlayfairSquare.PLAINTEXT_STR);
 
 	// Encrypt string
 	var ciphertext = "";
@@ -316,24 +314,29 @@ PlayfairSquare.prototype.encrypt = function(str)
 		var ch1 = str.charAt(i++);
 		var index1 = this.characterMap.getInIndex(ch1.toUpperCase());
 		if (index1 < 0)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.INVALID_CHARACTER,
-											  PlayfairSquare.PLAINTEXT_STR, ch1);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.INVALID_CHARACTER, PlayfairSquare.PLAINTEXT_STR,
+											  ch1);
+		}
 
 		// Validate second character of pair
 		var ch2 = str.charAt(i++);
 		var index2 = this.characterMap.getInIndex(ch2.toUpperCase());
 		if (index2 < 0)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.INVALID_CHARACTER,
-											  PlayfairSquare.PLAINTEXT_STR, ch2);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.INVALID_CHARACTER, PlayfairSquare.PLAINTEXT_STR,
+											  ch2);
+		}
 
 		// Test for identical pair
 		if (ch1 == ch2)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.IDENTICAL_PAIR,
-											  PlayfairSquare.PLAINTEXT_STR, ch1);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.IDENTICAL_PAIR, PlayfairSquare.PLAINTEXT_STR,
+											  ch1);
+		}
 
 		// Get indices of ciphertext pair
-		var indices = PlayfairSquare.getEncryptionIndices(this.inverseKey[index1], this.inverseKey[index2],
-														  null);
+		var indices = PlayfairSquare.getEncryptionIndices(this.inverseKey[index1], this.inverseKey[index2], null);
 
 		// Append to ciphertext
 		ciphertext += this.characterMap.getOutChar(this.key[indices[0]]);
@@ -349,12 +352,11 @@ PlayfairSquare.prototype.decrypt = function(str)
 {
 	// Test for valid key
 	if (!this.valid)
-		throw new PlayfairSquareException(PlayfairSquare.ErrorId.NO_KEY);
+		throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.NO_KEY);
 
 	// Test for odd-length string
 	if (str.length % 2 != 0)
-		throw new PlayfairSquareException(PlayfairSquare.ErrorId.LENGTH_IS_ODD,
-										  PlayfairSquare.CIPHERTEXT_STR);
+		throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.LENGTH_IS_ODD, PlayfairSquare.CIPHERTEXT_STR);
 
 	// Decrypt string
 	var plaintext = "";
@@ -365,24 +367,29 @@ PlayfairSquare.prototype.decrypt = function(str)
 		var ch1 = str.charAt(i++);
 		var index1 = this.characterMap.getOutIndex(ch1.toUpperCase());
 		if (index1 < 0)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.INVALID_CHARACTER,
-											  PlayfairSquare.CIPHERTEXT_STR, ch1);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.INVALID_CHARACTER, PlayfairSquare.CIPHERTEXT_STR,
+											  ch1);
+		}
 
 		// Validate second character of pair
 		var ch2 = str.charAt(i++);
 		var index2 = this.characterMap.getOutIndex(ch2.toUpperCase());
 		if (index2 < 0)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.INVALID_CHARACTER,
-											  PlayfairSquare.CIPHERTEXT_STR, ch2);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.INVALID_CHARACTER, PlayfairSquare.CIPHERTEXT_STR,
+											  ch2);
+		}
 
 		// Test for identical pair
 		if (ch1 == ch2)
-			throw new PlayfairSquareException(PlayfairSquare.ErrorId.IDENTICAL_PAIR,
-											  PlayfairSquare.CIPHERTEXT_STR, ch1);
+		{
+			throw new PlayfairSquareException(PlayfairSquare.ErrorMsg.IDENTICAL_PAIR, PlayfairSquare.CIPHERTEXT_STR,
+											  ch1);
+		}
 
 		// Get indices of plaintext pair
-		var indices = PlayfairSquare.getDecryptionIndices(this.inverseKey[index1], this.inverseKey[index2],
-														  null);
+		var indices = PlayfairSquare.getDecryptionIndices(this.inverseKey[index1], this.inverseKey[index2], null);
 
 		// Append to plaintext
 		plaintext += this.characterMap.getOutChar(this.key[indices[0]]);

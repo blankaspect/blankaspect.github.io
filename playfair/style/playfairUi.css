@@ -4,172 +4,302 @@ Styles for Playfair user interface
 
 \**********************************************************************/
 
-button
-{
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+button {
+  border: 1px solid;
+  padding: 0.25em 0.5em;
   font-size: 1em;
 }
-button#solveButton
-{
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+button#solveButton {
+  padding: 0.25em 1.5em;
 }
 
-div#codeSquare
-{
+div#codeSquare {
   display: table;
-  background-color: #FCFAE8;
-  color: #000000;
-  border: 1px solid #C0C0C0;
+  border: 1px solid;
   padding: 0.3em;
 }
-div#codeSquare > div
-{
+div#codeSquare > div {
   display: table-row;
 }
-div#codeSquare > div > div
-{
+div#codeSquare > div > div {
   display: table-cell;
   text-align: center;
   padding: 0.1em 0.35em;
   width: 1.0em;
 }
 
-div#encryptionPane
-{
+div#encryptionPane {
   display: table;
-  border: 1px solid #C0C0C0;
-  padding: 6px;
+  border: 1px solid;
+  padding: 0.5em;
 }
-div#encryptionPane > div
-{
+div#encryptionPane > div {
   display: table-row;
 }
-div#encryptionPane > div > div
-{
+div#encryptionPane > div > div {
   display: table-cell;
-  padding: 2px 6px;
+  padding: 0.25em 0.6em;
 }
-div#encryptionPane > div > div.label
-{
+div#encryptionPane > div > div.label {
   text-align: right;
   padding-right: 0.2em;
 }
 
-div.filler
-{
+div.filler {
   width: 100%;
 }
 
-div.label
-{
-  color: #004060;
+div.label {
   white-space: nowrap;
 }
 
-div#solutionControlPane
-{
+div#solutionControlPane {
   display: table;
   width: 100%;
 }
-div#solutionControlPane > div
-{
+div#solutionControlPane > div {
   display: table-row;
 }
-div#solutionControlPane > div > div
-{
+div#solutionControlPane > div > div {
   display: table-cell;
-  padding: 2px 6px;
+  padding: 0.25em 0.6em;
 }
-div#solutionControlPane > div > div.label
-{
+div#solutionControlPane > div > div.label {
   text-align: right;
   padding-right: 0;
 }
 
-div#solutionPane
-{
+div#solutionPane {
   display: table;
   margin-top: 6px;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid #C0C0C0;
+  border: 1px solid;
   padding: 6px;
 }
 
-div#solutionUpperPane
-{
+div#solutionUpperPane {
   display: table;
 }
-div#solutionUpperPane > div
-{
+div#solutionUpperPane > div {
   display: table-row;
 }
-div#solutionUpperPane > div > div
-{
+div#solutionUpperPane > div > div {
   display: table-cell;
 }
-div#solutionUpperPane > div > div#mappingsCell
-{
+div#solutionUpperPane > div > div#mappingsCell {
   padding: 0 3px 4px 0;
 }
-div#solutionUpperPane > div > div#solutionsCell
-{
+div#solutionUpperPane > div > div#solutionsCell {
   padding: 0 0 4px 3px;
 }
 
-div#upperPane
-{
+div#upperPane {
   display: table;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid #C0C0C0;
-  padding: 3px;
+  border: 1px solid;
+  padding: 0.25em;
 }
-div#upperPane > div
-{
+div#upperPane > div {
   display: table-row;
 }
-div#upperPane > div > div
-{
+div#upperPane > div > div {
   display: table-cell;
   vertical-align: middle;
-  padding: 3px;
+  padding: 0.25em;
 }
 
-input
-{
+input {
+  border: 1px solid;
   font-size: 1em;
-  padding: 2px 3px;
+  padding: 0.25em 0.4em;
 }
 
-select
-{
+select {
+  border: 1px solid;
   font-size: 1em;
-  padding: 2px 3px;
+  padding: 0.25em 0.4em;
 }
 
-span.adjacentButton
-{
+span.adjacentButton {
   padding-left: 6px;
 }
 
-textarea
-{
+textarea {
   font-family: "Roboto Mono", monospace;
 }
 
-textarea#mappingsTextArea
-{
-  background-color: #FFFFFF;
-  border: 1px solid #C0C0C0;
+textarea#mappingsTextArea {
+  border: 1px solid;
 }
 
-textarea#solutionsTextArea
-{
-  background-color: #FCFAE8;
-  border: 1px solid #C0C0C0;
+textarea#solutionsTextArea {
+  border: 1px solid;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --pane-border-color: #C0C0C0;
+
+    --control-text-color: #000000;
+    --control-text-color-disabled: #00000050;
+
+    --control-background-color: #FFFFFF;
+    --control-background-color-disabled: #FFFFFF50;
+
+    --control-border-color: #C0C0C0;
+    --control-border-color-disabled: #C0C0C050;
+  }
+
+  button {
+    color: var(--control-text-color);
+    background-color: #D8D8EC;
+    border-color: #909090;
+  }
+  button:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: #D8D8EC50;
+    border-color: #90909050;
+  }
+
+  div#codeSquare {
+    background-color: #FCFAE8;
+    color: #000000;
+    border-color: var(--pane-border-color);
+  }
+
+  div#encryptionPane {
+    border-color: var(--pane-border-color);
+  }
+
+  div.label {
+    color: #004060;
+  }
+
+  div#solutionPane {
+    border-color: var(--pane-border-color);
+  }
+
+  div#upperPane {
+    border-color: var(--pane-border-color);
+  }
+
+  input {
+    color: var(--control-text-color);
+    background-color: var(--control-background-color);
+    border-color: var(--control-border-color);
+  }
+  input:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: var(--control-background-color-disabled);
+    border-color: var(--control-border-color-disabled);
+  }
+
+  select {
+    color: var(--control-text-color);
+    background-color: var(--control-background-color);
+    border-color: var(--control-border-color);
+  }
+  select:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: var(--control-background-color-disabled);
+    border-color: var(--control-border-color-disabled);
+  }
+
+  textarea#mappingsTextArea {
+    color: inherit;
+    background-color: #FFFFFF;
+    border-color: #C0C0C0;
+  }
+
+  textarea#solutionsTextArea {
+    color: inherit;
+    background-color: #FCFAE8;
+    border-color: #C0C0C0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pane-border-color: #606060;
+
+    --control-text-color: #FFFFFF;
+    --control-text-color-disabled: #FFFFFF50;
+
+    --control-background-color: #404040;
+    --control-background-color-disabled: #40404050;
+
+    --control-border-color: #808080;
+    --control-border-color-disabled: #80808050;
+  }
+
+  button {
+    color: var(--control-text-color);
+    background-color: #484860;
+    border-color: #B0B0B0;
+  }
+  button:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: #48486050;
+    border-color: #B0B0B050;
+  }
+
+  div#codeSquare {
+    background-color: #203044;
+    color: #F4F4F4;
+    border-color: var(--pane-border-color);
+  }
+
+  div#encryptionPane {
+    border-color: var(--pane-border-color);
+  }
+
+  div.label {
+    color: #80CCC8;
+  }
+
+  div#solutionPane {
+    border-color: var(--pane-border-color);
+  }
+
+  div#upperPane {
+    border-color: var(--pane-border-color);
+  }
+
+  input {
+    color: var(--control-text-color);
+    background-color: var(--control-background-color);
+    border-color: var(--control-border-color);
+  }
+  input:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: var(--control-background-color-disabled);
+    border-color: var(--control-border-color-disabled);
+  }
+
+  select {
+    color: var(--control-text-color);
+    background-color: var(--control-background-color);
+    border-color: var(--control-border-color);
+  }
+  select:disabled {
+    color: var(--control-text-color-disabled);
+    background-color: var(--control-background-color-disabled);
+    border-color: var(--control-border-color-disabled);
+  }
+
+  textarea#mappingsTextArea {
+    color: inherit;
+    background-color: #202428;
+    border-color: #606060;
+  }
+
+  textarea#solutionsTextArea {
+    color: inherit;
+    background-color: #203044;
+    border-color: #606060;
+  }
 }
 
 /*--------------------------------------------------------------------*/

@@ -6,110 +6,122 @@ Styles for Blank Aspect main page
 
 @import url("blankaspect-web.css");
 
-div.bar
-{
+div.bar {
   height: 24px;
   background-image: url("../images/titleBackground.png");
   background-repeat: repeat-x;
   background-position: top center;
 }
 
-div#main
-{
+div#main {
   display: table;
   margin: 0 1.0em;
 }
-div.mainRow
-{
+div.mainRow {
   display: flex;
 }
 
-div.helicalRamp
-{
+div.helicalRamp {
   line-height: 8px;
 }
-div#helicalRamp1
-{
+div#helicalRamp1 {
   text-align: left;
   background-position: center right;
 }
-div#helicalRamp2
-{
+div#helicalRamp2 {
   text-align: right;
   background-position: center left;
 }
 
-div#projectList
-{
+div#projectList {
   align-self: flex-start;
   padding: 1.5em;
 }
 
-div.projectOuter
-{
+div.projectOuter {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
-  border: 1px solid #B4B8C8;
+  border: 1px solid;
   padding: 0.25em 1.0em;
 }
 
-div.project
-{
+div.project {
   display: table;
   margin: 0;
   padding: 0.1em;
 }
 
-div.project > div
-{
+div.project > div {
   display: table-row;
 }
 
-div.project > div > div
-{
+div.project > div > div {
   display: table-cell;
 }
 
-div.projectIcon
-{
+div.projectIcon {
   vertical-align: top;
   padding-top: 0.25em;
 }
 
-div.projectText
-{
+div.projectText {
   vertical-align: middle;
   padding-left: 1.0em;
 }
 
-div.sectionTitle
-{
+div.sectionTitle {
   display: inline-block;
-  color: #304868;
-  background-color: #EEEEE8;
   margin-top: 1.5em;
   margin-bottom: 0.4em;
   padding: 0.2em 0.5em;
-  border: 1px solid #D8D8D2;
-  border-bottom: 2px solid #B4B8C8;
+  border: 1px solid;
+  border-bottom: 2px solid;
   font-weight: bold;
   font-size: 110%;
 }
 
-p.projectDescription
-{
+p.projectDescription {
   margin-top: 0.2em;
 }
 
-p.projectName
-{
+p.projectName {
   margin-top: 0;
   margin-bottom: 0.2em;
   font-weight: bold;
 }
-p.projectName > a
-{
-  color: #304868;
+
+@media (prefers-color-scheme: light) {
+  div.projectOuter {
+    border-color: #B4B8C8;
+  }
+
+  div.sectionTitle {
+    color: #304868;
+    background-color: #EEEEE8;
+    border-color: #D8D8D2;
+    border-bottom-color: #B4B8C8;
+  }
+
+  p.projectName > a {
+    color: #304868;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  div.projectOuter {
+    border-color: #606888;
+  }
+
+  div.sectionTitle {
+    color: #E0C8A8;
+    background-color: #34383C;
+    border-color: #606080;
+    border-bottom-color: #707060;
+  }
+
+  p.projectName > a {
+    color: #80CCC8;
+  }
 }
 
 /*--------------------------------------------------------------------*/
